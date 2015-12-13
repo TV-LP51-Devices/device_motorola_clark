@@ -85,6 +85,7 @@ etc/firmware/vrgain.bin
 bin/btnvtool
 bin/hci_qcomm_init
 bin/wcnss_filter
+etc/user_bhd_psy.conf
 etc/firmware/nvm_tlv.bin
 etc/firmware/nvm_tlv_1.3.bin
 etc/firmware/nvm_tlv_2.1.bin
@@ -98,7 +99,6 @@ etc/firmware/rampatch_tlv_3.2.tlv
 vendor/lib/libbtnv.so
 
 # Camera
-bin/mm-qcamera-app
 bin/mm-qcamera-daemon
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
@@ -119,7 +119,6 @@ lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
 lib/libmot_sensorlistener.so
 lib/libmot-qc-fd-offline.so
-lib/libmm-qcamera.so
 lib/libqomx_core.so
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libflash_pmic.so
@@ -305,8 +304,6 @@ vendor/lib/libsmemlog.so
 vendor/lib/libvoice-svc.so
 
 # GPS
--app/MotGeoFenceSvc/MotGeoFenceSvc.apk
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
 bin/loc_launcher
 bin/gpsone_daemon
 bin/location-mq
@@ -393,6 +390,7 @@ bin/hardware_revisions.sh
 # NFC
 # Postprocessing
 bin/mm-pp-daemon
+etc/firmware/BCM20795A2_001.003.025.0005.0048_Generic_I2C_NCD_Signed_configdata.ncd
 vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 vendor/lib/libdisp-aba.so
@@ -408,7 +406,7 @@ etc/cne/andsfCne.xml
 etc/cne/SwimConfig.xml
 lib/libcnefeatureconfig.so
 framework/com.motorola.motosignature.jar
--priv-app/CNEService/CNEService.apk
+-priv-app/CNEService.apk
 vendor/lib/libcneapiclient.so
 vendor/lib/libcneconn.so
 vendor/lib/libcneqmiutils.so
@@ -422,12 +420,15 @@ vendor/lib/libvendorconn.so
 vendor/lib/libwqe.so
 
 # Radio
+-app/MotoSignatureApp/MotoSignatureApp.apk
 bin/charge_only_mode
 bin/diag_klog
 bin/diag_mdlog
 bin/diag_mdlog-getlogs
 bin/diag_mdlog-wrap
 bin/diag_qshrink4_daemon
+bin/ipacm
+bin/ipacm-diag
 bin/port-bridge
 bin/tcmd
 bin/test_diag
@@ -436,42 +437,52 @@ bin/netmgrd
 bin/qmi_motext_hook
 bin/qmuxd
 bin/radish
-bin/rild
 bin/rfs_access
 bin/rmt_storage
-etc/diag_mdlog/Bluetooth_audio_V1.cfg
 etc/diag_mdlog/Bluetooth_V1.cfg
-etc/diag_mdlog/default.cfg
-etc/diag_mdlog/default.opts
+etc/diag_mdlog/Bluetooth_audio_V1.cfg
+etc/diag_mdlog/Connection_Issues_V8_wifi.cfg
+etc/diag_mdlog/Connection_Issues_V9.cfg
+etc/diag_mdlog/Connection_Issues_V9_wifi.cfg
+etc/diag_mdlog/FIT_V18_1.cfg
+etc/diag_mdlog/FIT_V18_2_volte_full_ip.cfg
+etc/diag_mdlog/FIT_V18_3_audio.cfg
+etc/diag_mdlog/GNSS_SUPL_V5.cfg
 etc/diag_mdlog/GNSS_V4.cfg
 etc/diag_mdlog/Vzw_Connection_Issues_V1.cfg
 etc/diag_mdlog/WLAN_V1.cfg
-etc/permissions/cneapiclient.xml
-etc/permissions/com.google.widevine.software.drm.xml
-etc/permissions/com.motorola.hw.sensorhub.xml
+etc/diag_mdlog/default.cfg
+etc/diag_mdlog/default.opts
+etc/sensors/sensor_def_qcomdev.conf
 etc/permissions/com.motorola.motosignature.xml
+etc/permissions/com.verizon.ims.xml
+etc/permissions/ims.xml
 etc/permissions/org.simalliance.openmobileapi.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
-etc/sensors/sensor_def_qcomdev.conf
-framework/com.google.widevine.software.drm.jar
 framework/qcnvitems.jar
 framework/qcrilhook.jar
+framework/com.verizon.ims.jar
 framework/org.simalliance.openmobileapi.jar
 lib/libadspd.so
 lib/libmdmcutback.so
 lib/libmotext_inf.so
 lib/libqmimotext.so
-lib/libril.so
--priv-app/MotoSignatureApp/MotoSignatureApp.apk
+-priv-app/atfwd/atfwd.apk
+-priv-app/ims/ims.apk
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+vendor/bin/qti
 vendor/lib/libimscamera_jni.so
-#vendor/lib/libimsmedia_jni.so
+vendor/lib/libimsmedia_jni.so
+vendor/lib64/libimscamera_jni.so:priv-app/ims/lib/arm64/libimscamera_jni.so
+vendor/lib64/libimsmedia_jni.so:priv-app/ims/lib/arm64/libimsmedia_jni.so
+vendor/lib/liblqe.so
 vendor/lib/libmdmdetect.so
 vendor/lib/libnetmgr.so
+vendor/lib64/libqcmaputils.so
 vendor/lib/libril-qc-qmi-1.so
 vendor/lib/libril-qcril-hook-oem.so
-vendor/lib/libtime_genoff.so
+-vendor/lib/libtime_genoff.so
 vendor/lib/libxml.so
 vendor/lib/libperipheral_client.so
 
@@ -489,10 +500,8 @@ vendor/lib/libSubSystemShutdown.so
 lib64/hw/sensorhub.msm8992.so
 
 # Time (Linked to radio)
--app/TimeService/TimeService.apk
 bin/time_daemon
 vendor/lib/libTimeService.so
--vendor/lib/libtime_geoff.so
 vendor/lib/hw/flp.default.so
 vendor/lib/egl/libQTapGLES.so
 

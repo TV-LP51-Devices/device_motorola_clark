@@ -44,18 +44,20 @@ TARGET_NO_RPC := true
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 
-BOARD_KERNEL_SEPARATED_DT := true
-BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
-TARGET_KERNEL_SOURCE := kernel/motorola/msm8992
-TARGET_KERNEL_CONFIG := clark_defconfig
-TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_ARCH := arm64
-TARGET_USES_UNCOMPRESSED_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
+
+#BOARD_KERNEL_SEPARATED_DT := true
+#BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
+#TARGET_KERNEL_SOURCE := kernel/motorola/msm8992
+#TARGET_KERNEL_CONFIG := clark_defconfig
+#TARGET_KERNEL_HEADER_ARCH := arm64
+#TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
+#TARGET_KERNEL_ARCH := arm64
+#TARGET_USES_UNCOMPRESSED_KERNEL := true
 BOARD_VENDOR := motorola-qcom
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 earlyprintk=msm_hsl_uart,0xf991e000 utags.blkdev=/dev/block/bootdevice/by-name/utags utags.backup=/dev/block/bootdevice/by-name/utagsBackup
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset BOARD_RAMDISK_OFFSET --tags_offset BOARD_KERNEL_TAGS_OFFSET
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset BOARD_RAMDISK_OFFSET --tags_offset BOARD_KERNEL_TAGS_OFFSET --dt $(DEVICE_PATH)/dt.img
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := msm8992
@@ -114,6 +116,9 @@ QCOM_BT_USE_BTNV := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 BOARD_BLUEDROID_VENDOR_CONF := $(DEVICE_PATH)/bluetooth/libbt_vndcfg.txt
 
+# QCRIL
+TARGET_RIL_VARIANT := caf
+
 # Graphics
 USE_OPENGL_RENDERER := true
 TARGET_USES_C2D_COMPOSITION := true
@@ -142,12 +147,6 @@ PROTOBUF_SUPPORTED := true
 
 #Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
-
-TARGET_USES_AOSP := true
-# Force camera module to be compiled only in 32-bit mode on 64-bit systems
-# Once camera module can run in the native mode of the system (either
-# 32-bit or 64-bit), the following line should be deleted
-BOARD_QTI_CAMERA_32BIT_ONLY := true
 
 #Enable peripheral manager
 TARGET_PER_MGR_ENABLED := true
